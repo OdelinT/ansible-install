@@ -1,0 +1,12 @@
+FROM debian:10
+RUN useradd toto
+RUN echo 'toto:toto' | chpasswd
+RUN usermod -aG sudo toto
+RUN mkdir /home/toto && chown toto /home/toto # pas créé en même temps que le compte sur Debian
+RUN apt update && apt install openssh-server -y && apt install vim -y && apt install python -y && apt install sudo -y && apt install 
+
+RUN mkdir -p /root/.ssh
+# RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7VwJ/cqwOVP1fjUWLr+XdzwojXBqqf8z3L5DgBG6FXymiXbVpgDhDxKCxA/8ZBEe3u/XfJ2e9WZvMSCCpbYojfyeXfatJ0CRHKbwnlzxNzbEP51ij/K0xCsIXCkJw4fm73MHqf/idz0YCU7XmN+HgmcSEZDmu8uyIVARf7H5gApAFPVrnnp6Xr4o05OvEkA/bYvjcahr9WmStAWGkN2PTlMtkDXzjKCwXYm9La/NRG9MXkgVER13PNqh+FOeNiqAvzz7vP3ogqOBxyfuC/BzB1NVRf/8tVlM6QYnmkkNadhTmqCUDaRCtc6gNDWxyWHtKyDGQoM3RAAhRYqpE/+Kl odelin@NEXLT079" >> /root/.ssh/authorized_keys
+RUN service ssh start
+CMD [ "/bin/bash" ]
+EXPOSE 22
