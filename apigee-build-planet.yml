@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 - hosts: apigee
   gather_facts: true
@@ -93,3 +94,81 @@
     #apigee_tls_mp_keystore_src:
     #apigee_tls_mp_keystore_keyalias:
     #apigee_tls_mp_keystore_password:
+=======
+---
+- hosts: all
+  gather_facts: true
+  max_fail_percentage: 0
+  roles:
+    - apigee-bootstrap
+    - apigee-base
+    - apigee-edge
+    - apigee-tls-ms
+    - apigee-tls-ui
+    - apigee-tls-mp
+    - apigee-organization
+    - apigee-dev-portal
+    - apigee-validate
+  vars:
+    apigee_topology:
+      - dc-1 apigee2 aio
+
+    # Set this to false to retain installation files in the temporary directory
+    # (default: /tmp/apigee).
+    apigee_clean_up: true
+
+    # apigee-base
+    apigee_installation_path: /opt
+    # Google-hosted Internet repo
+    apigee_repository_username: odelin.tamayo@nexworld.fr
+    apigee_repository_password: TVM9zCUuKwWFaLj!
+    # Locally-hosted repo mirror
+    #apigee_repository_protocol: http://
+    #apigee_repository_address: mirror-address
+    #apigee_repository_username: admin
+    #apigee_repository_password: admin
+    # Tarball stored on the filesystem
+    #apigee_repository_protocol: file://
+    #apigee_repository_base_path: /path/to/repos
+
+    # apigee-edge
+    apigee_admin_email: opdk@apigee.com
+    apigee_admin_password: Apigee11
+    apigee_ldap_password: Apigee11
+    apigee_postgresql_password: Apigee11
+    apigee_cassandra_password: Apigee11
+    # Path to the license file on the Ansible control host.
+    apigee_license_path: SET_ME
+    # Leave blank to disable mail.
+    apigee_smtp_host:
+    apigee_smtp_mail_from: noreply@apigee.com
+
+    # apigee-organization
+    apigee_organization_name: apigee
+    apigee_environment_name: dev
+    apigee_virtual_host_port: 9001
+    # Add as many aliases as needed.
+    apigee_virtual_host_aliases:
+      - SET_ME_1
+      - SET_ME_2
+    apigee_analytics_retention_days: 90
+
+    # apigee-dev-portal
+    apigee_dp_admin_firstname: Apigee
+    apigee_dp_admin_lastname: OPDK
+    apigee_dp_admin_username: opdk
+    apigee_dp_admin_email: opdk@apigee.com
+    apigee_dp_admin_password: Apigee11
+
+    # apigee-tls
+    # Set these to use existing keystores.
+    #apigee_tls_ms_keystore_src:
+    #apigee_tls_ms_keystore_keyalias:
+    #apigee_tls_ms_keystore_password:
+    #apigee_tls_ui_keystore_src:
+    #apigee_tls_ui_keystore_keyalias:
+    #apigee_tls_ui_keystore_password:
+    #apigee_tls_mp_keystore_src:
+    #apigee_tls_mp_keystore_keyalias:
+    #apigee_tls_mp_keystore_password:
+>>>>>>> 68c5339
